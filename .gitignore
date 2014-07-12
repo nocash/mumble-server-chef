@@ -1,4 +1,5 @@
-.bundle/
-.vagrant/
-cookbooks/
-tmp/
+/.bundle/
+/.vagrant/
+/cookbooks/
+/tmp/
+/tmp/librarian/
