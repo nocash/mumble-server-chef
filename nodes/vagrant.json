@@ -2,7 +2,81 @@
   "run_list": [
     "murmur"
   ],
+
   "automatic": {
     "ipaddress": "vagrant"
+  },
+
+  "murmur": {
+    "config": {
+      "variables": {
+
+        "registerName": {
+          "value": "Bullet Riddled Bodies",
+          "comment": "The registerName setting also specifies the \"name\" of your server in the public server list. The list is no longer sorted alphabetically, so please, in the interests of being user-friendly, don't set it to something silly trying to arbitrarily \"rank\" your server. This setting is also used as the \"Root\" channel name, so you probably want to set it even if you don't want to register your server."
+        },
+
+        "rememberchannel": {
+          "value": "false",
+          "comment": "When a user connects to a server they've already been on, by default the server will remember the last channel they were in and move them to it automatically. Toggling this setting to false will disable that feature."
+        },
+
+        "defaultchannel": {
+          "value": "4",
+          "comment": "If a user has no stored channel (they've never been connected to the server before, or rememberchannel is set to false) and the client hasn't been given a URL that includes a channel path, the default behavior is that they will end up in the root channel. You can set this setting to a channel ID, and the user will automatically be moved into that channel instead. Note that this is the numeric ID of the channel, which can be a little tricky to get (you'll either need to use an RPC mechanism, watch the console of a debug client, or root around through the Murmur Database to get it)."
+        },
+
+        "allowping": {
+          "value": "true",
+          "comment": "Setting this to false disables responses to the UDP ping sweep that clients will make when the connection dialog is open. Note that on publicly listed servers, and on some configured clients, this will prevent the server from showing up in the list."
+        },
+
+        "database": {
+          "value": "/var/lib/mumble-server/mumble-server.sqlite",
+          "comment": "If dbDriver is QSQLITE (the default), this setting will specify the path to the database file. Other database drivers will use this setting for their own purposes -with QMYSQL it will set the database name."
+        },
+
+        "logfile": {
+          "value": "/var/log/mumble-server/mumble-server.log",
+          "comment": "By default, murmur will log to murmur.log in the current working directory. You can change this file by specifying it in the logfile setting, including a full path if necessary. You can set this setting blank, and Murmur will log only via message boxes (Win32 systems) and to the console (non-Win32 systems)."
+        },
+
+        "pidfile": {
+          "value": "/var/run/mumble-server/mumble-server.pid",
+          "comment": "If this setting is set to a filename, Murmur will write it's PID to this file when it forks. This enables service checkers to ensure the process is still running, and restart it if it's not. The file will be removed if Murmur shuts down cleanly. Note that Murmur on Windows systems will not write a PID file."
+        },
+
+        "welcometext": {
+          "value": "\"<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />\"",
+          "comment": "This setting configures a \"message of the day\" which is displayed to all users who connect to the server. You can put some HTML in this message. Encase in quotes to spread it out on multiple lines."
+        },
+
+        "port": {
+          "value": "64738",
+          "comment": "This setting configures the TCP and UDP ports that Murmur will listen on - the default is 64738. If the Murmur process is running multiple virtual servers, then this port will be incremented for each virtual server by default. You can specify, via RPC, a specific port for each virtual server if you wish to override the defaults."
+        },
+
+        "serverpassword": {
+          "value": "",
+          "comment": "This setting configures the default password for unregistered users - registered users will not be prompted for this password (they will either have their own, or be authenticated by their certificate). This setting is usually configured on a per-virtual-server basis, via RPC."
+        },
+
+        "bandwidth": {
+          "value": "72000",
+          "comment": "You can configure a per-user upper bandwidth limit, in bits per second. This allows you to clamp your users down to a sensible setting if you are limited in bandwidth. This does not set a minimum bandwidth - the Murmur client will check it's own bandwidth setting and the server's bandwidth settings, and choose the lower of the two. The default is 72000, which is 72Kbps. Setting this over about 130000 doesn't really do anything. Note that this is per user."
+        },
+
+        "users": {
+          "value": "100",
+          "comment": "The users setting configures a limit on the maximum number of users per virtual server.$xxoThe users setting configures a limit on the maximum number of users per virtual server."
+        },
+
+        "uname": {
+          "value": "mumble-server",
+          "comment": "On Unix-like OSes, you can start Murmur as root and have it drop privileges to another account such as \"mumble\" or \"murmur\". The username must already exist on your system, and have write access to the Murmur database, logfiles, etc. This option is ignored if Murmur is not started as root."
+        }
+
+      }
+    }
   }
 }
