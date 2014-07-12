@@ -1,0 +1,19 @@
+SITE
+  remote: https://supermarket.getchef.com/api/v1
+  specs:
+    apt (2.4.0)
+    build-essential (2.0.4)
+    murmur (0.1.1)
+      apt (>= 0.0.0)
+      runit (>= 0.0.0)
+    runit (1.5.10)
+      build-essential (>= 0.0.0)
+      yum (~> 3.0)
+      yum-epel (>= 0.0.0)
+    yum (3.2.2)
+    yum-epel (0.3.6)
+      yum (~> 3.0)
+
+DEPENDENCIES
+  murmur (>= 0)
+
