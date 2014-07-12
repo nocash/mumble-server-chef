@@ -84,14 +84,14 @@ Vagrant.configure('2') do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
-  config.omnibus.chef_version = :latest
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "./cookbooks"
-    chef.add_recipe "murmur"
-
-    # You may also specify custom JSON attributes:
-    chef.json = {}
-  end
+  # config.omnibus.chef_version = :latest
+  # config.vm.provision "chef_solo" do |chef|
+  #   chef.cookbooks_path = "./cookbooks"
+  #   chef.add_recipe "murmur"
+  #
+  #   # You may also specify custom JSON attributes:
+  #   chef.json = {}
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
