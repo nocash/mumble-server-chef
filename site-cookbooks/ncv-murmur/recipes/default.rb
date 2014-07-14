@@ -23,3 +23,9 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+
+template '/etc/mumble-server.ini' do
+  group 'mumble-server'
+  source 'mumble-server.ini.erb'
+  user 'root'
+end
