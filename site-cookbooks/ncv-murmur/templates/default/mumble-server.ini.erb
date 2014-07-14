@@ -1,3 +1,6 @@
+rememberchannel=false
+defaultchannel=4
+
 # Path to database. If blank, will search for
 # murmur.sqlite in default locations or create it if not found.
 database=/var/lib/mumble-server/mumble-server.sqlite
@@ -55,6 +58,12 @@ icesecretwrite=
 #autobanTimeframe = 120
 #autobanTime = 300
 
+# Setting this to false disables responses to the UDP ping sweep that clients
+# will make when the connection dialog is open. Note that on publicly listed
+# servers, and on some configured clients, this will prevent the server from
+# showing up in the list.
+allowping=true
+
 # Murmur default to logging to murmur.log. If you leave this blank,
 # murmur will log to the console (linux) or through message boxes (win32).
 logfile=/var/log/mumble-server/mumble-server.log
@@ -67,7 +76,7 @@ pidfile=/var/run/mumble-server/mumble-server.pid
 # configure it here than through D-Bus or Ice.
 #
 # Welcome message sent to clients when they connect
-welcometext="<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />"
+#welcometext="<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />"
 
 # Port to bind TCP and UDP sockets to
 port=64738
@@ -85,6 +94,10 @@ bandwidth=72000
 
 # Maximum number of concurrent clients allowed.
 users=100
+
+# Amount of users with Opus support needed to force Opus usage, in percent.
+# 0 = Always enable Opus, 100 = enable Opus if it's supported by all clients.
+#opusthreshold=100
 
 # Regular expression used to validate channel names
 # (note that you have to escape backslashes with \ )
@@ -117,7 +130,7 @@ users=100
 # addresses.
 # Only uncomment the 'registerName' parameter if you wish to give your "Root" channel a custom name.
 #
-#registerName=Mumble Server
+registerName=NO CASH VALUE
 #registerPassword=secret
 #registerUrl=http://mumble.sourceforge.net/
 #registerHostname=
@@ -140,6 +153,10 @@ uname=mumble-server
 # If this options is enabled, only clients which have a certificate are allowed
 # to connect.
 #certrequired=False
+
+# If enabled, clients are sent information about the servers version and operating
+# system.
+#sendversion=True
 
 # You can configure any of the configuration options for Ice here. We recommend
 # leave the defaults as they are.
