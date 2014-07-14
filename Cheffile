@@ -3,4 +3,5 @@
 
 site 'https://supermarket.getchef.com/api/v1'
 
-cookbook 'murmur'
+cookbook 'murmur-too',
+  path: 'site-cookbooks/murmur-too'
