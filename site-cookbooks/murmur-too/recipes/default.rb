@@ -26,3 +26,4 @@
 
 include_recipe 'apt'
 package 'mumble-server'
+service 'mumble-server'
