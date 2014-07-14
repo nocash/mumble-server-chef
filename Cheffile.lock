@@ -9,6 +9,12 @@ PATH
     murmur-too (0.1.0)
       apt (>= 0.0.0)
 
+PATH
+  remote: site-cookbooks/ncv-murmur
+  specs:
+    ncv-murmur (0.1.0)
+
 DEPENDENCIES
   murmur-too (>= 0)
+  ncv-murmur (>= 0)
 

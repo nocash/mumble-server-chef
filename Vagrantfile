@@ -16,6 +16,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "./cookbooks"
     chef.add_recipe "murmur-too"
+    chef.add_recipe "ncv-murmur"
 
     # You may also specify custom JSON attributes:
     chef.json = {}
