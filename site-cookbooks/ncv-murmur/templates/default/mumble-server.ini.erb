@@ -3,7 +3,7 @@ defaultchannel=4
 
 # Path to database. If blank, will search for
 # murmur.sqlite in default locations or create it if not found.
-database=/var/lib/mumble-server/mumble-server.sqlite
+database=<%= node[:murmur][:config][:database] %>
 
 # If you wish to use something other than SQLite, you'll need to set the name
 # of the database above, and also uncomment the below.
