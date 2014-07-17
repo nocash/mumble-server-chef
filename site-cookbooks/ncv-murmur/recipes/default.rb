@@ -25,8 +25,8 @@
 #
 
 include_recipe 'apt'
-# package 'sqlite3'
 package 'gzip'
+package 'sqlite3'
 
 template '/etc/mumble-server.ini' do
   group 'mumble-server'
