@@ -15,6 +15,7 @@ Vagrant.configure('2') do |config|
   config.omnibus.chef_version = :latest
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "./cookbooks"
+    chef.add_recipe "awscli"
     chef.add_recipe "murmur-too"
     chef.add_recipe "ncv-murmur"
 

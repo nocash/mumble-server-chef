@@ -3,6 +3,9 @@
 
 site 'https://supermarket.getchef.com/api/v1'
 
+cookbook 'awscli',
+  git: 'https://github.com/shlomoswidler/awscli.git'
+
 cookbook 'murmur-too',
   path: 'site-cookbooks/murmur-too'
 

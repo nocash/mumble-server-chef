@@ -3,6 +3,13 @@ SITE
   specs:
     apt (2.4.0)
 
+GIT
+  remote: https://github.com/shlomoswidler/awscli.git
+  ref: master
+  sha: 1a40077c975904e081d2c5d2e7d2761722d18b86
+  specs:
+    awscli (0.3.0)
+
 PATH
   remote: site-cookbooks/murmur-too
   specs:
@@ -15,6 +22,7 @@ PATH
     ncv-murmur (0.1.0)
 
 DEPENDENCIES
+  awscli (>= 0)
   murmur-too (>= 0)
   ncv-murmur (>= 0)
 
