@@ -28,6 +28,15 @@ include_recipe 'apt'
 package 'gzip'
 package 'sqlite3'
 
+template "#{ENV['HOME']}/.aws/credentials" do
+  backup false
+  source 'aws-credentials.erb'
+end
+
+template "#{ENV['HOME']}/.aws/config" do
+  source 'aws-config.erb'
+end
+
 template '/etc/mumble-server.ini' do
   group 'mumble-server'
   source 'mumble-server.ini.erb'
