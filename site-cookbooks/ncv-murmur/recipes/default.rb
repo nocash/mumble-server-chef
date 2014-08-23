@@ -28,6 +28,10 @@ include_recipe 'apt'
 package 'gzip'
 package 'sqlite3'
 
+directory "#{ENV['HOME']}/.aws" do
+  action :create
+end
+
 template "#{ENV['HOME']}/.aws/credentials" do
   backup false
   source 'aws-credentials.erb'
