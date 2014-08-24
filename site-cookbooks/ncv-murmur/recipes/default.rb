@@ -35,6 +35,12 @@ end
 template "#{ENV['HOME']}/.aws/credentials" do
   backup false
   source 'aws-credentials.erb'
+
+  aws_credentials = data_bag_item('aws-credentials', 'credentials')
+  variables :credentials => {
+    aws_access_key_id: aws_credentials['aws_access_key_id'],
+    aws_secret_access_key: aws_credentials['aws_secret_access_key'],
+  }
 end
 
 template "#{ENV['HOME']}/.aws/config" do
