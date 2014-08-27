@@ -1,6 +1,8 @@
 {
   "run_list": [
-    "murmur"
+    "awscli",
+    "murmur-too",
+    "ncv-murmur"
   ],
 
   "automatic": {
