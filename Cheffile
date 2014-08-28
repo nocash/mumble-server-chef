@@ -9,5 +9,5 @@ cookbook 'awscli',
 cookbook 'murmur-too',
   path: 'site-cookbooks/murmur-too'
 
-cookbook 'ncv-murmur',
-  path: 'site-cookbooks/ncv-murmur'
+cookbook 'ncv-server',
+  path: 'site-cookbooks/ncv-server'

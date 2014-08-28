@@ -2,7 +2,7 @@
   "run_list": [
     "awscli",
     "murmur-too",
-    "ncv-murmur"
+    "ncv-server"
   ],
 
   "automatic": {

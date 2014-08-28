@@ -28,5 +28,5 @@ include_recipe 'apt'
 package 'gzip'
 package 'sqlite3'
 
-include_recipe 'ncv::aws'
-include_recipe 'ncv::murmur'
+include_recipe 'ncv-server::aws'
+include_recipe 'ncv-server::murmur'

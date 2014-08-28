@@ -17,12 +17,13 @@ PATH
       apt (>= 0.0.0)
 
 PATH
-  remote: site-cookbooks/ncv-murmur
+  remote: site-cookbooks/ncv-server
   specs:
-    ncv-murmur (0.1.0)
+    ncv-server (0.1.0)
+      apt (>= 0.0.0)
 
 DEPENDENCIES
   awscli (>= 0)
   murmur-too (>= 0)
-  ncv-murmur (>= 0)
+  ncv-server (>= 0)
 
