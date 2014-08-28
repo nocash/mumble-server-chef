@@ -26,3 +26,4 @@
 
 include_recipe 'ncv-server::aws'
 include_recipe 'ncv-server::murmur'
+include_recipe 'ncv-server::backups'
