@@ -24,9 +24,5 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-include_recipe 'apt'
-package 'gzip'
-package 'sqlite3'
-
 include_recipe 'ncv-server::aws'
 include_recipe 'ncv-server::murmur'

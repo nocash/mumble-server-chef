@@ -1,3 +1,7 @@
+include_recipe 'apt'
+package 'gzip'
+package 'sqlite3'
+
 template '/etc/mumble-server.ini' do
   group 'mumble-server'
   source 'mumble-server.ini.erb'
