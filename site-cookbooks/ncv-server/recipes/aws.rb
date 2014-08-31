@@ -1,13 +1,20 @@
-directory "#{ENV['HOME']}/.aws" do
+chef_user = node[:current_user]
+home_dir = Dir.home(chef_user)
+
+directory "#{home_dir}/.aws" do
   action :create
+  group chef_user
+  owner chef_user
 end
 
-template "#{ENV['HOME']}/.aws/credentials" do
+template "#{home_dir}/.aws/credentials" do
   backup false
+  group chef_user
+  owner chef_user
   source 'aws-credentials.erb'
 
   secret_key_path =
-    "#{ENV['HOME']}/chef-credentials-secret-key"
+    "#{home_dir}/chef-credentials-secret-key"
   secret_key =
     Chef::EncryptedDataBagItem.load_secret(secret_key_path)
   aws_credentials =
@@ -19,6 +26,8 @@ template "#{ENV['HOME']}/.aws/credentials" do
   }
 end
 
-template "#{ENV['HOME']}/.aws/config" do
+template "#{home_dir}/.aws/config" do
+  group chef_user
+  owner chef_user
   source 'aws-config.erb'
 end
