@@ -4,12 +4,14 @@ home_dir = Dir.home(chef_user)
 directory "#{home_dir}/.aws" do
   action :create
   group chef_user
+  mode 00700
   owner chef_user
 end
 
 template "#{home_dir}/.aws/credentials" do
   backup false
   group chef_user
+  mode 0600
   owner chef_user
   source 'aws-credentials.erb'
 
@@ -28,6 +30,7 @@ end
 
 template "#{home_dir}/.aws/config" do
   group chef_user
+  mode 0600
   owner chef_user
   source 'aws-config.erb'
 end
