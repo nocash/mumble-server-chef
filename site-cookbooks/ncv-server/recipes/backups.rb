@@ -12,6 +12,8 @@ bash 'initial_database_sync' do
   code <<-EOF
     mkdir -p #{backup_path}
     aws s3 sync #{s3_path} #{backup_path}
+    rm -v #{murmur_path}/mumble-server.sqlite
+    cp -v #{backup_path}/mumble-server.sqlite #{murmur_path}/
     EOF
   creates "#{backup_path}/mumble-server.sqlite"
 end
