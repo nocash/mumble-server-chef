@@ -50,7 +50,33 @@ describe "A newly provisioned server" do
   end
 
   context "with AWS installed", :aws do
-    pending
+    it "creates the AWS configuration files" do
+      command = vm.run "ls ~/.aws"
+
+      expect(command.output)
+        .to match("config")
+        .and match("credentials")
+    end
+
+    it "sets the region to us-west-2" do
+      command = vm.run "grep 'us-west-2' ~/.aws/config"
+
+      expect(command.output).to eq "region = us-west-2\n"
+    end
+
+    it "sets the AWS credentials" do
+      command = vm.run "cat ~/.aws/credentials"
+
+      expect(command.output)
+        .to match("aws_access_key_id =")
+        .and match("aws_secret_access_key = ")
+    end
+
+    it "can copy files from S3" do
+      command = vm.run "aws s3 cp s3://mumble-server/db-backups/mumble-server.sqlite /tmp/"
+
+      expect(command.status).to be_success
+    end
   end
 
   def secret_key_file
