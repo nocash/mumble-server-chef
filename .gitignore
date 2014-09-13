@@ -1,4 +1,5 @@
 /.bundle/
+/.rspec
 /.vagrant/
 /cookbooks/
 /tmp/
