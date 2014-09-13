@@ -70,7 +70,7 @@ describe "A newly provisioned server" do
         .and match("credentials")
     end
 
-    it "sets the region to us-west-2" do
+    it "sets the region" do
       command = vm.run "grep 'us-west-2' ~/.aws/config"
 
       expect(command.output).to eq "region = us-west-2\n"
