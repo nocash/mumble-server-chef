@@ -28,6 +28,18 @@ describe "A newly provisioned server" do
       expect(command.output).to match "mumble-server"
     end
 
+    it "created a Murmur configuration file" do
+      command = vm.run "ls /etc/mumble-server.ini"
+
+      expect(command.status).to be_success
+    end
+
+    it "customized the Murmur configuration file" do
+      command = vm.run "sudo grep 'registerName=' /etc/mumble-server.ini"
+
+      expect(command.output).to eq "registerName=NO CASH VALUE\n"
+    end
+
     it "created a database backup directory" do
       command = vm.run "sudo ls /var/lib/mumble-server/backups"
 
