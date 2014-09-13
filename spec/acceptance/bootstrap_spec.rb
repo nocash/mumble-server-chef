@@ -111,6 +111,25 @@ describe "A newly provisioned server" do
     end
   end
 
+  class RemoteCommand < ShellCommand
+    def initialize(command, server:)
+      super(command)
+      @server = server
+    end
+
+    private
+
+    attr_reader :server
+
+    def prepare_command(command)
+      escape(command).prepend("ssh #{server.ssh_opts} #{server.name} ")
+    end
+
+    def escape(command)
+      Shellwords.shellescape(command)
+    end
+  end
+
   class VirtualMachine
     def ip       ; "127.0.0.1" ; end
     def name     ; "vagrant"   ; end
@@ -147,23 +166,6 @@ describe "A newly provisioned server" do
 
     private
 
-    class RemoteCommand < ShellCommand
-      def initialize(command, server:)
-        super(command)
-        @server = server
-      end
-
-      private
-
-      attr_reader :server
-
-      def prepare_command(command)
-        escape(command).prepend("ssh #{server.ssh_opts} #{server.name} ")
-      end
-
-      def escape(command)
-        Shellwords.shellescape(command)
-      end
     end
   end
 end
