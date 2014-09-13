@@ -7,13 +7,5 @@
 
   "automatic": {
     "ipaddress": "vagrant"
-  },
-
-  "aws": {
-    "config": {
-      "default": {
-        "region": "us-west-2"
-      }
-    }
   }
 }
