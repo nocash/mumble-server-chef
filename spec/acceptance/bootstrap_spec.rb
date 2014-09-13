@@ -3,7 +3,7 @@ require "open3"
 
 describe "A newly provisioned server" do
   before :context do
-    next
+    next # only need to test the full process occasionaly
     reinstall_cookbooks
     vm.destroy
     vm.boot
@@ -15,14 +15,14 @@ describe "A newly provisioned server" do
     expect(vm).to have_ssh
   end
 
-  context "with murmur installed", :murmur do
-    it "is running the murmur service" do
+  context "with Murmur installed", :Murmur do
+    it "is running the Murmur service" do
       command = vm.run "service --status-all 2>&1"
 
       expect(command.output).to match "mumble-server"
     end
 
-    it "installed murmur to /var/lib" do
+    it "installed Murmur to /var/lib" do
       command = vm.run "ls /var/lib"
 
       expect(command.output).to match "mumble-server"
@@ -36,13 +36,13 @@ describe "A newly provisioned server" do
         .and match(/mumble-server\.\d{14}\.sqlite\.gz/)
     end
 
-    it "has a database matching the most recent murmur backup" do
+    it "has a database matching the most recent Murmur backup" do
       command = vm.run "sudo diff /var/lib/mumble-server/{,backups}/mumble-server.sqlite"
 
       expect(command.output).to be_empty
     end
 
-    it "runs a murmur database backup script daily" do
+    it "runs a Murmur database backup script daily" do
       command = vm.run "ls /etc/cron.daily/mumble-server-db-backup"
 
       expect(command.output).to eq "/etc/cron.daily/mumble-server-db-backup\n"
