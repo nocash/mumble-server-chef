@@ -11,10 +11,13 @@ backup_path = "#{murmur_path}/backups"
 
 bash 'initial_database_sync' do
   code <<-EOF
+    service mumble-server stop
     mkdir -p #{backup_path}
     aws s3 sync #{s3_path} #{backup_path}
-    rm -v #{murmur_path}/#{murmur_db_file}
-    cp -v #{backup_path}/#{murmur_db_file} #{murmur_path}/
+    rm -f #{murmur_path}/#{murmur_db_file}
+    cp #{backup_path}/#{murmur_db_file} #{murmur_path}/
+    chown mumble-server:mumble-server #{murmur_path}/#{murmur_db_file}
+    service mumble-server start
   EOF
   creates "#{backup_path}/#{murmur_db_file}"
 end

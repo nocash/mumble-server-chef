@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR=$( cd $(dirname $0) ; pwd -P )
+
+$SCRIPT_DIR/refresh
+scp "$HOME/.ssh/chef-credentials-secret-key" $1:
+knife solo bootstrap $1

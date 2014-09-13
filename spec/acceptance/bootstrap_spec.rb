@@ -48,7 +48,12 @@ describe "A newly provisioned server" do
     end
 
     it "has a database matching the most recent Murmur backup" do
-      command = vm.run "sudo diff /var/lib/mumble-server/{,backups}/mumble-server.sqlite"
+      # This is tricky to test since the db is changed when Murmur starts. It
+      # was a lot easier when the db permissions were wrong and Murmur
+      # couldn't write to the file ;)
+      pending "Untestable?"
+
+      command = vm.run "sudo diff --brief /var/lib/mumble-server/{,backups/}mumble-server.sqlite"
 
       expect(command.output).to be_empty
     end
@@ -57,6 +62,12 @@ describe "A newly provisioned server" do
       command = vm.run "ls /etc/cron.daily/mumble-server-db-backup"
 
       expect(command.output).to eq "/etc/cron.daily/mumble-server-db-backup\n"
+    end
+
+    it "is listening on port 64738" do
+      command = vm.run "netstat -aon | grep 64738 | grep LISTEN"
+
+      expect(command.status).to be_success
     end
   end
 
