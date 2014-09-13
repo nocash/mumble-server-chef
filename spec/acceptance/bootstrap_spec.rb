@@ -1,5 +1,4 @@
 require "spec_helper"
-require "open3"
 
 describe "A newly provisioned server" do
   before :context do
@@ -102,84 +101,5 @@ describe "A newly provisioned server" do
 
   def vm
     @virtual_machine ||= VirtualMachine.new
-  end
-
-  class ShellCommand < Struct.new(:command)
-    attr_reader :output, :error, :status
-
-    def run
-      exec prepare_command(command)
-      self
-    end
-
-    private
-
-    def exec(command)
-      @output, @error, @status = Open3.capture3(command)
-    end
-
-    def prepare_command(command)
-      command
-    end
-  end
-
-  class RemoteCommand < ShellCommand
-    def initialize(command, server:)
-      super(command)
-      @server = server
-    end
-
-    private
-
-    attr_reader :server
-
-    def prepare_command(command)
-      escape(command).prepend("ssh #{server.ssh_opts} #{server.name} ")
-    end
-
-    def escape(command)
-      Shellwords.shellescape(command)
-    end
-  end
-
-  class VirtualMachine
-    def ip       ; "127.0.0.1" ; end
-    def name     ; "vagrant"   ; end
-    def ssh_port ; 2222        ; end
-    def user     ; "vagrant"   ; end
-
-    def boot
-      sh "vagrant up --no-provision"
-    end
-
-    def destroy
-      sh "vagrant destroy --force"
-    end
-
-    def provision
-      sh "knife solo bootstrap #{name} #{ssh_opts}"
-    end
-
-    def run(command)
-      RemoteCommand.new(command, server: self).run
-    end
-
-    def has_ssh?
-      run("echo OK").status.success?
-    end
-
-    def send_file(file_path, remote_path: "")
-      `scp #{ssh_opts} #{file_path} #{name}:#{remote_path}`
-    end
-
-    def ssh_opts
-      "-F #{ENV["HOME"]}/.ssh/config"
-    end
-
-    private
-
-    def sh(command)
-      ShellCommand.new(command).run
-    end
   end
 end
