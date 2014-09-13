@@ -15,6 +15,7 @@ bash 'initial_database_sync' do
     aws s3 sync #{s3_path} #{backup_path}
     rm -v #{murmur_path}/#{murmur_db_file}
     cp -v #{backup_path}/#{murmur_db_file} #{murmur_path}/
+    chown mumble-server:mumble-server #{murmur_path}/#{murmur_db_file}
   EOF
   creates "#{backup_path}/#{murmur_db_file}"
 end
