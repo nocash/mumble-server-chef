@@ -137,15 +137,15 @@ describe "A newly provisioned server" do
     def user     ; "vagrant"   ; end
 
     def boot
-      `vagrant up --no-provision`
+      sh "vagrant up --no-provision"
     end
 
     def destroy
-      `vagrant destroy --force`
+      sh "vagrant destroy --force"
     end
 
     def provision
-      `knife solo bootstrap #{name} #{ssh_opts}`
+      sh "knife solo bootstrap #{name} #{ssh_opts}"
     end
 
     def run(command)
@@ -153,7 +153,7 @@ describe "A newly provisioned server" do
     end
 
     def has_ssh?
-      run("ls").status.success?
+      run("echo OK").status.success?
     end
 
     def send_file(file_path, remote_path: "")
@@ -166,6 +166,8 @@ describe "A newly provisioned server" do
 
     private
 
+    def sh(command)
+      ShellCommand.new(command).run
     end
   end
 end
