@@ -3,4 +3,11 @@
 
 site 'https://supermarket.getchef.com/api/v1'
 
-cookbook 'murmur'
+cookbook 'awscli',
+  git: 'https://github.com/shlomoswidler/awscli.git'
+
+cookbook 'murmur-too',
+  path: 'site-cookbooks/murmur-too'
+
+cookbook 'ncv-server',
+  path: 'site-cookbooks/ncv-server'

@@ -1,9 +1,19 @@
 {
   "run_list": [
-    "murmur"
+    "awscli",
+    "murmur-too",
+    "ncv-server"
   ],
 
   "automatic": {
     "ipaddress": "vagrant"
+  },
+
+  "aws": {
+    "config": {
+      "default": {
+        "region": "us-west-2"
+      }
+    }
   }
 }

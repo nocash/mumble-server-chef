@@ -1,0 +1,46 @@
+#!/bin/bash -e
+
+keep_count=7
+remote_path="s3://mumble-server/db-backups"
+source_path="<%= node[:murmur][:config][:database] %>"
+timestamp=$( date +%Y%m%d%H%M%S )
+
+source_dir=$( dirname "$source_path" )
+source_file=$( basename "$source_path" )
+
+backup_dir="$source_dir/backups"
+source_ext="${source_file##*.}"
+source_file_root="${source_file%.*}"
+
+backup_file="$source_file"
+rotate_glob="$backup_dir/${source_file_root}.*.${source_ext}.gz"
+rotate_file="${source_file_root}.${timestamp}.${source_ext}"
+
+backup_path="$backup_dir/$backup_file"
+rotate_path="$backup_dir/$rotate_file"
+
+function create_backup {
+  mkdir -p "$backup_dir"
+  cp "$source_path" "$backup_path"
+  cp "$backup_path" "$rotate_path"
+  gzip "$rotate_path"
+}
+
+function prune_backups {
+  backup_count=$( ls -1f $rotate_glob | wc -l | xargs echo )
+  while [ $backup_count -gt $keep_count ]; do
+    rm "$( ls -1t $rotate_glob | tail -n1 )"
+    let backup_count=$( ls -1f $rotate_glob | wc -l | xargs echo )
+  done
+}
+
+function sync_backups {
+  command -v aws >&-
+  if [ $? -eq 0 ]; then
+    aws s3 sync "$backup_dir" "$remote_path"
+  fi
+}
+
+create_backup
+prune_backups
+sync_backups

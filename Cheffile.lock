@@ -2,18 +2,28 @@ SITE
   remote: https://supermarket.getchef.com/api/v1
   specs:
     apt (2.4.0)
-    build-essential (2.0.4)
-    murmur (0.1.1)
+
+GIT
+  remote: https://github.com/shlomoswidler/awscli.git
+  ref: master
+  sha: 1a40077c975904e081d2c5d2e7d2761722d18b86
+  specs:
+    awscli (0.3.0)
+
+PATH
+  remote: site-cookbooks/murmur-too
+  specs:
+    murmur-too (0.1.0)
       apt (>= 0.0.0)
-      runit (>= 0.0.0)
-    runit (1.5.10)
-      build-essential (>= 0.0.0)
-      yum (~> 3.0)
-      yum-epel (>= 0.0.0)
-    yum (3.2.2)
-    yum-epel (0.3.6)
-      yum (~> 3.0)
+
+PATH
+  remote: site-cookbooks/ncv-server
+  specs:
+    ncv-server (0.1.0)
+      apt (>= 0.0.0)
 
 DEPENDENCIES
-  murmur (>= 0)
+  awscli (>= 0)
+  murmur-too (>= 0)
+  ncv-server (>= 0)
 
