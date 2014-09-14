@@ -37,7 +37,7 @@ function prune_backups {
 
 function sync_backups {
   command -v aws >&-
-  if [ $sync_enabled -eq 1 && $? -eq 0 ]; then
+  if [ $sync_enabled -eq 1 -a $? -eq 0 ]; then
     aws s3 sync "$backup_dir" "$remote_path"
   fi
 }
