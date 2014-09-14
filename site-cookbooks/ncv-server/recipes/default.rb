@@ -27,6 +27,7 @@
 # TODO: configurable local backup path
 #   Would greatly simplify path generation in mumble-server-db-backup.sh.erb
 #   and similar scripts.
+# TODO: use actual cron instead of anacron
 
 include_recipe 'ncv-server::aws'
 include_recipe 'ncv-server::murmur'
