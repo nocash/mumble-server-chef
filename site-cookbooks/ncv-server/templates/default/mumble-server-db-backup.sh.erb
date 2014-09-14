@@ -1,8 +1,9 @@
 #!/bin/bash -e
 
 keep_count=7
-remote_path="s3://mumble-server/db-backups"
+remote_path="<%= node[:murmur][:backups][:s3_path] %>"
 source_path="<%= node[:murmur][:config][:database] %>"
+sync_enabled=<%= node[:murmur][:backups][:sync] ? 1 : 0 %>
 timestamp=$( date +%Y%m%d%H%M%S )
 
 source_dir=$( dirname "$source_path" )
@@ -36,7 +37,7 @@ function prune_backups {
 
 function sync_backups {
   command -v aws >&-
-  if [ $? -eq 0 ]; then
+  if [ $sync_enabled -eq 1 -a $? -eq 0 ]; then
     aws s3 sync "$backup_dir" "$remote_path"
   fi
 }
