@@ -5,7 +5,7 @@ package 'gzip'
 
 murmur_db_file = File.basename(node[:murmur][:config][:database])
 murmur_path = File.dirname(node[:murmur][:config][:database])
-s3_path = "s3://mumble-server/db-backups"
+s3_path = node[:murmur][:backups][:s3_path]
 
 backup_path = "#{murmur_path}/backups"
 

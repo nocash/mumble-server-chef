@@ -24,6 +24,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# TODO: configurable local backup path
+#   Would greatly simplify path generation in mumble-server-db-backup.sh.erb
+#   and similar scripts.
+
 include_recipe 'ncv-server::aws'
 include_recipe 'ncv-server::murmur'
 include_recipe 'ncv-server::backups'
